@@ -46,31 +46,37 @@ def create_user():
         return {"count": len(results), "users": results}
       
 
-#    @app.route('/cars/<car_id>', methods=['GET', 'PUT', 'DELETE'])
-# def handle_car(car_id):
-#     car = CarsModel.query.get_or_404(car_id)
 
-#     if request.method == 'GET':
-#         response = {
-#             "name": car.name,
-#             "model": car.model,
-#             "doors": car.doors
-#         }
-#         return {"message": "success", "car": response}
+#update,get and delete user by id
+@users.route('/users/<user_id>', methods=['GET', 'PUT', 'DELETE'])
+def handle_user(user_id):
+    user = User.query.get_or_404(user_id)
 
-#     elif request.method == 'PUT':
-#         data = request.get_json()
-#         car.name = data['name']
-#         car.model = data['model']
-#         car.doors = data['doors']
-#         db.session.add(car)
-#         db.session.commit()
-#         return {"message": f"car {car.name} successfully updated"}
+    if request.method == 'GET':
+        response = {
+            "name": user.name,
+            "email": user.email,
+            "contact": user.contact,
+            "password":user.password,
+            "address":user.address
+        }
+        return {"message": "success", "user": response}
 
-#     elif request.method == 'DELETE':
-#         db.session.delete(car)
-#         db.session.commit()
-#         return {"message": f"Car {car.name} successfully deleted."}   
+    elif request.method == 'PUT':
+        data = request.get_json()
+        user.name = data['name']
+        user.email = data['email']
+        user.contact = data['contact']
+        user.address = data['address']
+        user.password = data['password']
+        db.session.add(user)
+        db.session.commit()
+        return {"message": f"User details of {user.name} successfully updated"}
+
+    elif request.method == 'DELETE':
+        db.session.delete(user)
+        db.session.commit()
+        return {"message": f"User {user.name} successfully deleted."}   
   
         
   
