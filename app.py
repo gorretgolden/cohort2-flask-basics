@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 # if you want to run the application now
 # Otherwise wait until we build these models next
 from backend.users.model import User
+from backend.profile.model import Profile
 
 
 
@@ -14,4 +15,4 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-   return dict(db=db, User = User)
+   return dict(db=db, User = User,Profile=Profile)
